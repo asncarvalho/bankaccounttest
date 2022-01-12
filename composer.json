@@ -11,9 +11,12 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.4"
+        "laravel/ui": "^3.4",
+        "laravellegends/pt-br-validator": "^8.0",
+      "ext-pdo": "*"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.11",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
@@ -56,7 +59,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
