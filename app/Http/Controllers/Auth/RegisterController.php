@@ -51,6 +51,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'cpf' => ['required', 'cpf', 'formato_cpf', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -67,6 +68,7 @@ class RegisterController extends Controller
         return User::create([
             'cpf' => $data['cpf'],
             'name' => $data['name'],
+            'account_number' => uniqid(),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

@@ -13,7 +13,7 @@
                     <form action="{{route('users.update', $user->id)}}" method="POST">
                         {{method_field('PUT')}}
                         @else
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('users.store') }}">
                             @endif
                             @csrf
                             <div class="row mb-3">

@@ -43,7 +43,7 @@
                         class="dropdown-toggle">{{__('Usuários')}}</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li><a href="{{route('users.index')}}">Listar Usuários</a></li>
-                        <li><a href="{{route('register')}}">Cadastrar Usuários</a></li>
+                        <li><a href="{{route('users.create')}}">Cadastrar Usuários</a></li>
                     </ul>
                 </li>
                 <li><a href="#">About</a></li>
@@ -252,6 +252,14 @@
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
+
+            console.log('{{Auth::guest()}}');
+
+            if ('{{Auth::guest()}}' === '1') {
+                $('#sidebarCollapse').hide();
+                $('#sidebar').addClass('active');
+            }
+
         });
 </script>
 
