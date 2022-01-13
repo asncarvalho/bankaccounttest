@@ -15,7 +15,7 @@ class UpdateUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('cpf')->unique()->after('id');
-            $table->decimal('bank_balance')->after('email');
+            $table->decimal('bank_balance')->after('email')->nullable();
         });
     }
 

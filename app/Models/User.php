@@ -8,7 +8,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @method static create(array $array)
  * @property  string $name
  */
 class User extends Authenticatable
@@ -21,6 +20,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'cpf',
         'name',
         'email',
         'password',
@@ -48,6 +48,4 @@ class User extends Authenticatable
      * @var mixed
      */
     private $name;
-
-
 }

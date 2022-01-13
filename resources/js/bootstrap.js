@@ -12,6 +12,7 @@ try {
 
 window.axios = require('axios');
 window.$ = require('jquery');
+require('jquery-mask-plugin');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**

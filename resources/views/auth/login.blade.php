@@ -71,3 +71,12 @@
     </div>
 </div>
 @endsection
+
+@section('pagescript')
+    <script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').hide();
+            $('#sidebar').addClass('active');
+        });
+    </script>
+@endsection

@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use LaravelLegends\PtBrValidator\Rules\FormatoCpf;
 
 class RegisterController extends Controller
 {
@@ -38,7 +39,6 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
     }
 
     /**
@@ -58,13 +58,14 @@ class RegisterController extends Controller
 
     /**
      * Create a new user instance after a valid registration.
-     *
      * @param  array  $data
      * @return User
      */
     protected function create(array $data): User
     {
+        // dd($data);
         return User::create([
+            'cpf' => $data['cpf'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),

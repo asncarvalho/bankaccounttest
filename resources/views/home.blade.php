@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Logado com Sucesso!') }}
 {{--                    <button type="submit" class="btn btn-sm btn-success">Teste</button>--}}
                 </div>
             </div>
