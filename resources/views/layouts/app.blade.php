@@ -19,7 +19,8 @@
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js">
     </script>
-    <!-- jQuery Custom Scroller CDN -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="dist/jquery.maskMoney.min.js" type="text/javascript"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -27,6 +28,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -34,6 +36,7 @@
         <nav id="sidebar">
             <div class="sidebar-header">
                 <h3>Simples Bank <i class="fas fa-hotel"></i></h3>
+                {{__("Saldo atual: ")}} {{Auth::user()->bank_balance . " R$"}}
             </div>
 
             <ul class="list-unstyled components">
@@ -46,18 +49,16 @@
                         <li><a href="{{route('users.create')}}">Cadastrar Usuários</a></li>
                     </ul>
                 </li>
-                <li><a href="#">About</a></li>
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Pages</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Conta
+                        Bancária</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li><a href="#">Page 1</a></li>
-                        <li><a href="#">Page 2</a></li>
-                        <li><a href="#">Page 3</a></li>
+                        <li><a href="#" id="make_draw" data-toggle="modal" data-target="#draw_modal">Sacar</a></li>
+                        <li><a href="#" id="make_pay" data-toggle="modal" data-target="#pay_modal">Depositar</a></li>
+                        <li><a href="#">Ver Extrato</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Portfolio</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">Contato</a></li>
             </ul>
         </nav>
         <!--Container Main start-->
@@ -109,6 +110,48 @@
             </nav>
             @yield('content')
         </main>
+    </div>
+
+    <div id="draw_modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sacar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="result">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="pay_modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Depositar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="result2">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
     </div>
 </body>
 <style>
@@ -253,7 +296,43 @@
                 $('#sidebar').toggleClass('active');
             });
 
-            console.log('{{Auth::guest()}}');
+            $("#make_draw").click(function () {
+                $.ajax({
+                    url: "{{route('paydraws.create')}}",
+                    method: "GET",
+                    data: {
+                        'transaction_id': 1
+                    },
+
+                    beforeSend:function(){
+                        $('.spinner-border').css('display', 'block');
+                    },
+
+                    success: function (html) {
+                        $('.spinner-border').css('display', 'none');
+                        $('#result').html(html);
+                    }
+                })
+            });
+
+            $("#make_pay").click(function () {
+                $.ajax({
+                    url: "{{route('paydraws.create')}}",
+                    method: "GET",
+                    data: {
+                        'transaction_id': 2
+                    },
+
+                    beforeSend:function(){
+                        $('.spinner-border').css('display', 'block');
+                    },
+
+                    success: function (html) {
+                        $('.spinner-border').css('display', 'none');
+                        $('#result2').html(html);
+                    }
+                })
+            });
 
             if ('{{Auth::guest()}}' === '1') {
                 $('#sidebarCollapse').hide();

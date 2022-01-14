@@ -13,6 +13,7 @@
         "@popperjs/core": "^2.10.2",
         "axios": "^0.21",
         "bootstrap": "^4.4.1",
+        "datatables.net-bs4": "^1.11.3",
         "jquery-mask-plugin": "^1.14.16",
         "jquery-ui": "^1.13.0",
         "laravel-mix": "^6.0.6",

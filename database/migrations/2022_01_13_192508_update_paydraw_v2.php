@@ -14,7 +14,7 @@ class UpdatePaydrawV2 extends Migration
     public function up()
     {
         Schema::table('pay_draw', function (Blueprint $table) {
-            $table->unsignedInteger('type_pd')->nullable();
+            $table->unsignedInteger('type_pd')->nullable()->after('id');
             $table->foreign('type_pd')
                 ->references('id')
                 ->on('type_paydraw')

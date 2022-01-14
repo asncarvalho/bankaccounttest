@@ -5,7 +5,9 @@
     <div class="row-justify-content">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{__("Lista de Usuários")}}</div>
+                <div class="card-header">
+                    <h3>{{__("Lista de Usuários")}}</h3>
+                </div>
 
                 <div class="card-body">
 
@@ -35,7 +37,7 @@
                             <tr>
                                 <th>{{$user->name}}</th>
                                 <th>{{$user->cpf}}</th>
-                                <th>{{$user->bank_balance ? $user->bank_balance : '0.00R$'}}</th>
+                                <th>{{$user->bank_balance ? $user->bank_balance . " R$" : '0.00R$'}}</th>
                                 <th class="row justify-content-around">
 
                                     <form action="{{route('users.edit', $user->id)}}" method="GET">
@@ -67,4 +69,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('pagescript')
+<script>
+    $(document).ready(function () {
+        $("#main-table").DataTable();
+    });
+</script>
 @endsection

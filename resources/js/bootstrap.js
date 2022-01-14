@@ -13,6 +13,7 @@ try {
 window.axios = require('axios');
 window.$ = require('jquery');
 require('jquery-mask-plugin');
+require('datatables.net-bs4')
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
