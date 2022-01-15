@@ -30,3 +30,4 @@ Route::resources([
 Route::get('/paydraws/index/{id}', [PaydrawController::class, 'index'])->name('paydraws.index');
 Route::post('/paydraws', [PaydrawController::class, 'store'])->name('paydraws.store');
 Route::get('/paydraws', [PaydrawController::class, 'create'])->name('paydraws.create');
+Route::get('/paydraws/charts/{id}', [PaydrawController::class, 'returnClientPaydraws'])->name('paydraws.chart');

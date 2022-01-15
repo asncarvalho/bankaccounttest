@@ -21,6 +21,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" charset="utf-8"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -58,7 +59,9 @@
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li><a href="#" id="make_draw" data-toggle="modal" data-target="#draw_modal">Sacar</a></li>
                         <li><a href="#" id="make_pay" data-toggle="modal" data-target="#pay_modal">Depositar</a></li>
+                        @if (!Auth::guest())
                         <li><a href="{{route('paydraws.index', Auth::user()->id)}}">Ver Extrato</a></li>
+                        @endif
                     </ul>
                 </li>
                 <li><a href="#">Contato</a></li>

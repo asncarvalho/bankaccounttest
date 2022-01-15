@@ -6,6 +6,7 @@ use App\Models\Paydraw;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PaydrawController extends Controller
 {
@@ -112,5 +113,28 @@ class PaydrawController extends Controller
     public function destroy(Paydraw $paydraw)
     {
         //
+    }
+
+    public function returnClientPaydraws($id = null)
+    {
+        $paydraws = Paydraw::select(DB::raw('YEAR(created_at) year'))->distinct()->get()->pluck('year');
+
+        $datas = [];
+        $datas_pay = [];
+
+        foreach ($paydraws as $value) {
+            $datas[$value][0] = Paydraw::select(DB::raw('SUM(value) as value'))
+                ->where('user_id', $id)
+                ->where('type_pd', 1)
+                ->whereYear('created_at', '=', $value)
+                ->get()->pluck('value');
+            $datas[$value][1] = Paydraw::select(DB::raw('SUM(value) as value'))
+                ->where('user_id', $id)
+                ->where('type_pd', 2)
+                ->whereYear('created_at', '=', $value)
+                ->get()->pluck('value');
+        }
+
+        return response()->json($datas);
     }
 }
