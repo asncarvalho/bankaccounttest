@@ -12,15 +12,15 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('assets/js/jquery.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js">
     </script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="dist/jquery.maskMoney.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js">
+    </script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -33,10 +33,13 @@
 
 <body>
     <div id="app">
+
         <nav id="sidebar">
             <div class="sidebar-header">
                 <h3>Simples Bank <i class="fas fa-hotel"></i></h3>
+                @if (!Auth::guest())
                 {{__("Saldo atual: ")}} {{Auth::user()->bank_balance . " R$"}}
+                @endif
             </div>
 
             <ul class="list-unstyled components">
@@ -55,7 +58,7 @@
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li><a href="#" id="make_draw" data-toggle="modal" data-target="#draw_modal">Sacar</a></li>
                         <li><a href="#" id="make_pay" data-toggle="modal" data-target="#pay_modal">Depositar</a></li>
-                        <li><a href="#">Ver Extrato</a></li>
+                        <li><a href="{{route('paydraws.index', Auth::user()->id)}}">Ver Extrato</a></li>
                     </ul>
                 </li>
                 <li><a href="#">Contato</a></li>

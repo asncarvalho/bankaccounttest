@@ -16,7 +16,9 @@ class PaydrawController extends Controller
      */
     public function index($id)
     {
-        $paydraws = Paydraw::where('user_id', $id);
+        $paydraws = Paydraw::where('user_id', $id)->get();
+
+        return view('paydraws.list', compact('paydraws'));
     }
 
     /**
@@ -53,6 +55,13 @@ class PaydrawController extends Controller
         } else {
             $user->bank_balance = $user->bank_balance + floatval($money2);
         }
+
+        Paydraw::create([
+            'type_pd' => intval($data->id),
+            'user_id' => Auth::user()->id,
+            'value' => $money2
+        ]);
+
 
         $user->save();
 

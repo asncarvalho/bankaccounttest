@@ -25,5 +25,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resources([
     'users' => UsersController::class,
-    'paydraws' => PaydrawController::class,
 ]);
+
+Route::get('/paydraws/index/{id}', [PaydrawController::class, 'index'])->name('paydraws.index');
+Route::post('/paydraws', [PaydrawController::class, 'store'])->name('paydraws.store');
+Route::get('/paydraws', [PaydrawController::class, 'create'])->name('paydraws.create');

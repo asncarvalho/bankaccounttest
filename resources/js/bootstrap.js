@@ -1,6 +1,9 @@
 window._ = require('lodash');
 
 try {
+    window.Popper = require('popper.js').default;
+    window.$ = window.jQuery = require('jquery');
+
     require('bootstrap');
 } catch (e) {}
 
@@ -13,7 +16,7 @@ try {
 window.axios = require('axios');
 window.$ = require('jquery');
 require('jquery-mask-plugin');
-require('datatables.net-bs4')
+require('datatables.net-bs4');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
